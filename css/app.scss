@@ -31,6 +31,22 @@ $main-color : $naranja;
 	-ms-box-flex:  0;
 	box-flex:  0;  
 	color: #fff;
+	transition: width 500ms ease-in-out;
+	will-change: width;
+	@media(max-width: 767px){
+ 		position: absolute;
+ 		left: -200px;
+ 		right: 0;
+ 		top: 0;
+ 		bottom: 0;
+ 		width: 0;
+ 		transition: width 500ms ease-in-out;
+ 		z-index: 999;
+ 		&.closed{
+ 			left: 0;
+ 			width: 100%;
+ 		}
+ 	}
 	.links{
 		list-style: none;
 		padding:0;
@@ -63,6 +79,10 @@ $main-color : $naranja;
 
 	h2{
 		color: $main-color;
+	}
+
+	#loader{
+		display: none;
 	}
 }
 

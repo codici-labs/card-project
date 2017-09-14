@@ -34,6 +34,12 @@
         </div>
     </div>
     <div class="column">
+      <div class="ui segment" id="loader">
+        <div class="ui active loader"></div>
+        <br>
+        <br>
+  
+      </div>
       <div id="prduct-detail"></div>
     </div>
     
@@ -56,14 +62,18 @@
           },
           minCharacters : 3,
           onSelect: function(result, response){
-            console.log(result);
-            console.log(response);
+            $('#prduct-detail').html('');
+            $('#loader').fadeIn();
+          
             var product_id = result.id_producto;
             $.ajax({
               url: '<?=base_url();?>products/showProductDetails/'+product_id,
               method: 'get',
               success: function(template){
-                  $('#prduct-detail').html(template);
+                  $('#loader').fadeOut('100', function(){
+                    $('#prduct-detail').html(template);
+                  });
+                  
               }
             });
           }

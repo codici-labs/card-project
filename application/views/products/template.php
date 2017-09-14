@@ -5,6 +5,6 @@
      <?=$product->name;?>
     </div>
     <p>Codigo: <?=$product->id_producto;?>
-	 <br />Costo: <?=$product->costo;?></p>
+	 <br />Costo: $<?=$product->costo;?></p>
   </div>
 </div>

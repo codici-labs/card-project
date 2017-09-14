@@ -25,7 +25,22 @@ body {
   -moz-box-flex: 0;
   -ms-box-flex: 0;
   box-flex: 0;
-  color: #fff; }
+  color: #fff;
+  transition: width 500ms ease-in-out;
+  will-change: width; }
+  @media (max-width: 767px) {
+    .app-sidebar {
+      position: absolute;
+      left: -200px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      transition: width 500ms ease-in-out;
+      z-index: 999; }
+      .app-sidebar.closed {
+        left: 0;
+        width: 100%; } }
   .app-sidebar .links {
     list-style: none;
     padding: 0; }
@@ -50,6 +65,8 @@ body {
   box-flex: 1; }
   .app-main h2 {
     color: #FF9800; }
+  .app-main #loader {
+    display: none; }
 
 .navbar-collapsed {
   display: none;
