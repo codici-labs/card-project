@@ -1,4 +1,4 @@
-<div class="ui inverted segment">
+<div class="ui segment app-statics">
 	<div class="ui statistics">
 	  <div class="ui red inverted statistic">
 	    <div class="value">

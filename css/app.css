@@ -85,6 +85,8 @@ body {
     padding: 15px;
     display: none;
     min-height: 60px; }
+  .app-main .app-statics {
+    background-color: #263238; }
 
 .navbar-collapsed {
   display: none;
