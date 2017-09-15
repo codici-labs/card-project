@@ -3,6 +3,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 $naranja: #FF9800;
 $main-color : $naranja;
@@ -65,6 +66,20 @@ $main-color : $naranja;
 
 		}
 	}
+
+	.avatar{
+		padding: 15px 0px;
+		img{
+			margin: auto;
+		}
+		.username{
+			margin-top: 15px;
+			text-align: center;
+			padding: 10px;
+			background-color: #555;
+			color: #fff;
+		}
+	}
 }
 
 
@@ -76,7 +91,7 @@ $main-color : $naranja;
 	-moz-box-flex: 1;
 	-ms-box-flex: 1;
 	box-flex: 1;
-
+	overflow-y: scroll;
 	h2{
 		color: $main-color;
 	}

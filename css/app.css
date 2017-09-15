@@ -2,7 +2,8 @@ html,
 body {
   height: 100%;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  overflow: hidden; }
 
 .wrapper {
   height: 100%;
@@ -54,6 +55,16 @@ body {
       .app-sidebar .links li a:hover {
         background-color: #FF9800;
         transition: all ease 0.5s; }
+  .app-sidebar .avatar {
+    padding: 15px 0px; }
+    .app-sidebar .avatar img {
+      margin: auto; }
+    .app-sidebar .avatar .username {
+      margin-top: 15px;
+      text-align: center;
+      padding: 10px;
+      background-color: #555;
+      color: #fff; }
 
 .app-main {
   padding: 15px;
@@ -62,7 +73,8 @@ body {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
   -ms-box-flex: 1;
-  box-flex: 1; }
+  box-flex: 1;
+  overflow-y: scroll; }
   .app-main h2 {
     color: #FF9800; }
   .app-main #loader {
