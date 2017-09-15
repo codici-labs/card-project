@@ -14,6 +14,9 @@
 	<div class="wrapper">
 		<!-- Sidebar -->
 		<div class="app-sidebar" id="app-sidebar">
+			<div class="avatar">
+				<img class="ui medium circular image" src="images/avatar.png">
+			</div>
 			<div class="">
 				<ul class="links">
 					<li><a href=""><i class="dashboard outline icon"></i> Dashboard</a></li>

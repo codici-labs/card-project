@@ -84,6 +84,15 @@ $main-color : $naranja;
 	#loader{
 		display: none;
 	}
+	#selected-product{
+		display:none;
+	}
+	
+	.selected-product-container{
+		padding:15px;
+		display: none;
+		min-height: 60px;
+	}
 }
 
 
@@ -99,4 +108,9 @@ $main-color : $naranja;
 	-ms-box-flex:  0;
 	box-flex:  0;  
 	ransition: all ease .5s
+}
+
+.show-on-load{
+	display:none;
+	width: 100%;
 }

@@ -34,17 +34,48 @@
         </div>
     </div>
     <div class="column">
-      <div class="ui segment" id="loader">
-        <div class="ui active loader"></div>
-        <br>
-        <br>
+      <div class="ui segment selected-product-container" >
+        <div class="ui active loader" id="loader"></div>
+       
+        <div class="ui" id="selected-product">
+         
+          <div class="content">
+            <div id="prduct-detail"></div>
+            <hr>
+            <div class="ui form">
+              <div class="fields">
+                <div class="field">
+                  <label>Cantidad</label>
+                  <input type="number">
+                </div>
+                <div class="field">
+                  <label>Precio de compra</label>
+                  <input type="number">
+                </div>
+                <div class="field">
+                  <label>&nbsp;</label>
+                  <a href="javascript:void(0);">
+                    <div class="ui animated button green" tabindex="0">
+                      <div class="visible content">Guardar</div>
+                      <div class="hidden content">
+                        <i class="check icon"></i>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>  
   
       </div>
-      <div id="prduct-detail"></div>
+      
+      
+      
     </div>
     
   </div>
-  
+    
 
   
 </div>
@@ -62,7 +93,9 @@
           },
           minCharacters : 3,
           onSelect: function(result, response){
+            $('.content').hide();
             $('#prduct-detail').html('');
+            $('.selected-product-container').fadeIn();
             $('#loader').fadeIn();
           
             var product_id = result.id_producto;
@@ -72,6 +105,9 @@
               success: function(template){
                   $('#loader').fadeOut('100', function(){
                     $('#prduct-detail').html(template);
+                    $('#selected-product').fadeIn();
+                    $('.content').show();
+                   
                   });
                   
               }
