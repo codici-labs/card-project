@@ -106,7 +106,7 @@
           },
           fields: {
             results : 'items',
-            title   : 'name',
+            title   : 'descripcion',
             url     : 'html_url'
           },
           minCharacters : 3,
@@ -116,7 +116,7 @@
             $('.selected-product-container').fadeIn();
             $('#loader').fadeIn();
           
-            var product_id = result.id_producto;
+            var product_id = result.id;
             $.ajax({
               url: '<?=base_url();?>products/showProductDetails/'+product_id,
               method: 'get',

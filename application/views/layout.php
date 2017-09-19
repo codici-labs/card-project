@@ -15,10 +15,12 @@
 	<div class="wrapper">
 		<!-- Sidebar -->
 		<div class="app-sidebar" id="app-sidebar">
+			<?if($this->config->item('use_avatar')){?>
 			<div class="avatar">
 				<img class="ui small circular image" src="<?=base_url()?>images/avatar.png">
 				<div class="username"><i class="edit icon"></i> Martoo</div>
 			</div>
+			<? } ?>
 			<div class="">
 				<ul class="links">
 					<li><a href="<?=base_url()?>dashboard"><i class="dashboard outline icon"></i> Dashboard</a></li>
