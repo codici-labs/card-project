@@ -20,4 +20,22 @@ class Api extends CI_Controller {
 		echo json_encode($productos);
 		//print_r($productos);
 	}
+
+	public function getProduct($barcode){
+		$this->db->where('codigo', $barcode);
+		$barcode = $this->db->get('productos')->row();
+		echo json_encode($barcode);
+		//print_r($productos);
+	}
+
+	public function getAlumno($tarjeta){
+		$this->db->select('a.*, t.codigo');
+		$this->db->from('alumnos a');
+		$this->db->join('tarjetas t', 'a.id = t.alumno');
+		$this->db->where('t.codigo',$tarjeta);
+		$tarjeta = $this->db->get()->row();
+		echo json_encode($tarjeta);
+		//print_r($productos);
+	}
+
 }
