@@ -17,6 +17,9 @@ class Products extends CI_Controller {
 		$this->layout->view('index');
 	}
 
+	public function add(){
+		$this->layout->view('add');
+	}
 
 	public function getJson($query){
 		$products = new stdClass();
@@ -25,8 +28,8 @@ class Products extends CI_Controller {
 	}
 
 	public function showProductDetails($product_id){
-		$data['product'] = $this->products->getById($product_id);
-
-		echo $this->load->view('products/template', $data, true);
+		$product = $this->products->getById($product_id);
+		header('Content-Type: application/json');
+		echo json_encode($product);
 	}
 }

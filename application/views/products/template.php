@@ -2,4 +2,4 @@
  <strong><?=$product->descripcion;?></strong>
 </div>
 <p>Codigo: <?=$product->codigo;?>
-<br />Costo: $<?=$product->costo;?></p>
+<br />Costo: <span class="data-buy" data-buy="<?=$product->costo;?>">$<?=$product->costo;?></span></p>

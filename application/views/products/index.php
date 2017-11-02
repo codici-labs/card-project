@@ -1,5 +1,5 @@
 <div class="ui secondary  menu">
-  <a class="active item">
+  <a class="active item" href="<?=base_url('products/add')?>">
     Agrear nuevo
   </a>
   <a class="item">
