@@ -1,3 +1,7 @@
+/*
+	App Main Theme
+	Variables
+*/
 html,
 body {
   height: 100%;
@@ -51,7 +55,9 @@ body {
         padding: 8px 15px;
         display: block;
         color: #fff;
-        transition: all ease 0.5s; }
+        transition: all ease .5s; }
+        .app-sidebar .links li a.active {
+          background-color: #FF9800; }
       .app-sidebar .links li a:hover {
         background-color: #FF9800;
         transition: all ease 0.5s; }
