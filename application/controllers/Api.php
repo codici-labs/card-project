@@ -44,10 +44,12 @@ class Api extends CI_Controller {
 		$postdata = file_get_contents("php://input");
 		$data = json_decode($postdata);
 		
+		
 		$this->descontarStock($data->productos);
 		$this->descontarPlata($data->alumno, $data->total);		
-		$this->crearVenta($data->alumno->id);
-		//$this->crearDescripcionVenta($venta_id);
+		$idVenta = $this->crearVenta($data->alumno->id);
+		//echo "idVenta: " . $idVenta;
+		$this->crearDescripcionVenta($idVenta, $data->productos);
 		//header('Content-Type: application/json');
 		//echo json_encode($data->productos[0]->id);
 
@@ -77,8 +79,15 @@ class Api extends CI_Controller {
 		return $this->db->insert_id();
 	}
 
-	private function crearDescripcionVenta(){
+	private function crearDescripcionVenta($idVenta, $productos){
+		foreach ($productos as $producto) {
+			$insert['id_venta'] = $idVenta;
+			$insert['id_producto'] = $producto->id;
+			$insert['valor'] = $producto->costo;
+			$insert['cantidad'] = $producto->cantidad;
+			$this->db->insert('detalles_ventas', $insert);
 
+		}
 	}
 
 }
