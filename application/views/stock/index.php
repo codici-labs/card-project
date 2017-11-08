@@ -1,12 +1,6 @@
-<div class="ui secondary  menu">
-  <a class="active item" href="<?=base_url();?>stock/add">
-    Agrear nuevo
-  </a>
-  <a class="item">
-    Messages
-  </a>
-  <a class="item">
-    Friends
+<div class="ui secondary menu">
+  <a class="item" href="<?=base_url('stock/add');?>">
+    Agregar nuevo
   </a>
   <div class="right menu">
     <div class="item">

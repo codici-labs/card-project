@@ -1,5 +1,5 @@
-<div class="ui secondary  menu">
-  <a class="item" href="<?=base_url();?>stock">
+<div class="ui secondary menu">
+  <a class="item" href="<?=base_url('stock');?>">
     <i class="left arrow icon"></i> Volver 
   </a>
   <a class="item">
@@ -27,7 +27,7 @@
       <div class="ui" id="selected-product">
        
         <div class="content">
-          <div id="product-detail"></div>
+          <div id="prduct-detail"></div>
           <hr>
           <div class="ui form">
             <div class="fields">
@@ -37,7 +37,7 @@
               </div>
               <div class="field">
                 <label>Precio de compra</label>
-                <input class="input-price" type="number">
+                <input type="number">
               </div>
               <div class="field">
                 <label>&nbsp;</label>
@@ -97,7 +97,6 @@
   </div>
 </div>
 <!-- / Modal -->
-
 <script type="text/javascript">
   $(document).ready(function(){
     $('.ui.search')
@@ -113,7 +112,7 @@
           minCharacters : 3,
           onSelect: function(result, response){
             $('.content').hide();
-            $('#product-detail').html('');
+            $('#prduct-detail').html('');
             $('.selected-product-container').fadeIn();
             $('#loader').fadeIn();
           
@@ -121,15 +120,11 @@
             $.ajax({
               url: '<?=base_url();?>products/showProductDetails/'+product_id,
               method: 'get',
-              success: function(data){
-                  console.log(data);
-                  var rendered = Mustache.render($('#product-template').html(), {descripcion: data.descripcion, costo: data.costo, codigo: data.codigo});
-                  
-                  $('.input-price').attr('min',data.costo).val(data.costo);
+              success: function(template){
                   $('#loader').fadeOut('100', function(){
-                  $('#product-detail').html(rendered);
-                  $('#selected-product').fadeIn();
-                  $('.content').show();
+                    $('#prduct-detail').html(template);
+                    $('#selected-product').fadeIn();
+                    $('.content').show();
                    
                   });
                   
@@ -143,15 +138,4 @@
         $('.ui.modal').modal('show');
       });
   });
-</script>
-
-
-<!-- Template -->
-<script id="product-template" type="x-tmpl-mustache">
-<div class="header">
- <strong>{{descripcion}}</strong>
-</div>
-<p>Codigo: {{codigo}}
-<br />
-Costo: {{costo}}</p>
 </script>

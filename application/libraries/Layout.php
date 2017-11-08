@@ -7,7 +7,7 @@ class Layout{
     public $layout;
     public $folder;
 
-    public function Layout($layout = "layout", $folder="dashboard"){
+    public function __construct($layout = "layout", $folder="dashboard"){
         $this->obj =& get_instance();
         $this->setLayout($layout);
         $this->setFolder($folder);

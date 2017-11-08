@@ -1,5 +1,3 @@
-@import "theme";
-
 html,
 body {
   height: 100%;
@@ -26,7 +24,7 @@ $main-color : $naranja;
 }
 
 .app-sidebar {
-	background: $sidebar-background-color;
+	background: #263238;
 	width: 200px;
 	-ms-flex: 0 100px;
 	-webkit-box-flex:  0;
@@ -58,14 +56,11 @@ $main-color : $naranja;
 			a{
 				padding: 8px 15px;
 				display: block;
-				color: $sidebar-link-color;
-				transition: all ease .5s;
-				&.active{
-					background-color: $sidebar-link-active-background-color;
-				}
+				color: #fff;
+				transition: all ease .5s
 			}
 			a:hover{
-				background-color: $sidebar-link-hover-background-color;
+				background-color: $main-color;
 				transition: all ease .5s
 			}
 
@@ -90,7 +85,7 @@ $main-color : $naranja;
 
 .app-main {
 	padding: 15px;
-	background: $app-background-color;
+	background: #ECEFF1;
 	-ms-flex: 1;
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
@@ -98,7 +93,7 @@ $main-color : $naranja;
 	box-flex: 1;
 	overflow-y: scroll;
 	h2{
-		color: $title-color;
+		color: $main-color;
 	}
 
 	#loader{
@@ -116,6 +111,13 @@ $main-color : $naranja;
 	
 	.app-statics{
 		background-color: #263238;
+	}
+
+	.ui.secondary.menu {
+		margin-left: 0px;
+		.ui.button {
+			line-height: inherit;
+		}
 	}
 }
 
@@ -138,3 +140,5 @@ $main-color : $naranja;
 	display:none;
 	width: 100%;
 }
+
+
