@@ -42,4 +42,10 @@ class Sales extends CI_Controller {
     }
 
 
+    function getDetails(){
+        $venta_id = $this->input->post('id');
+        $ventas = $this->sales->getFullDetallesById($venta_id);
+        echo json_encode($ventas);
+    }
+
 }

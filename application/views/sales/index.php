@@ -17,16 +17,42 @@
 <div class="ui segment" id="loader">
   <div class="ui active loader"></div>
 </div>
-<div id="products-container"></div>
+<div id="ventas-container"></div>
 
-<!-- Template: Products -->
-<script id="template-products" type="x-tmpl-mustache">
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Detalle de venta
+  </div>
+
+  <div class="content">
+   
+    <div class="description">
+      <div class="ui header">Venta #<span id="venta-id"></span></div>
+      <div id="detalle-venta-container"></div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+
+
+<!-- Template: Ventas -->
+<script id="template-ventas" type="x-tmpl-mustache">
   <table class="ui fixed single line celled table">
     <thead>
       <tr>
         <th>Alumno</th>
         <th>Fecha</th>
         <th>Total</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -35,8 +61,35 @@
         <td>{{nombre}} {{apellido}}</td>
         <td>{{fecha}}</td>
         <td>$ {{total}}</td>
+        <td><a href="javascript:void(0);" class="ver-detalle" data-id="{{id}}"><i class="search icon"></i> Detalles</a></td>
       </tr>
       {{/data.venta}}
+    </tbody>
+  </table>
+ 
+</script>
+
+<!-- Template: Detalle venta -->
+<script id="template-detalle-venta" type="x-tmpl-mustache">
+  <table class="ui fixed single line celled table">
+    <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Costo</th>
+        <th>Precio de venta</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#data}}
+      <tr>
+        <td>{{nombre}} {{apellido}}</td>
+        <td>{{descripcion}}</td>
+        <td>{{cantidad}}</td>
+        <td>$ {{costo}}</td>
+        <td>$ {{precio_venta}}</td>
+      {{/data}}
     </tbody>
   </table>
  
@@ -45,20 +98,20 @@
 
 <script type="text/javascript">
   //**************************/
-  // Get contracts
+  // Get Ventas
   //**************************/
-  function getProducts(filter){
+  function getVentas(filter){
     $('#loader').show();
-    $('#products-container').html('');
+    $('#ventas-container').html('');
     $.ajax({
       url: '<?=base_url();?>sales/get',
       data: {filter: filter},
       success: function(data){
         var parsedData = JSON.parse(data);
 
-        var template = $('#template-products').html();
+        var template = $('#template-ventas').html();
         var rendered = Mustache.render(template, {data: parsedData});
-        $('#products-container').html(rendered);
+        $('#ventas-container').html(rendered);
        
         $('#loader').hide();
         
@@ -68,8 +121,36 @@
 
   }
 
+  //**************************/
+  // Get Details
+  //**************************/
+  function getDetails(id){
+   
+    $('.ui.modal').modal('show');
+   
+    $('#detalle-venta-container').html('');
+
+    $.ajax({
+      url: '<?=base_url();?>sales/getDetails',
+      data: {id: id},
+      success: function(data){
+        console.log(data);
+        var parsedData = JSON.parse(data);
+
+        var template = $('#template-detalle-venta').html();
+        var rendered = Mustache.render(template, {data: parsedData});
+        $('#detalle-venta-container').html(rendered);
+       
+        //$('#loader').hide();
+        
+      },
+      method: 'post'
+    });
+
+  }
+
   $(document).ready(function(){
-    getProducts();
+    getVentas();
 
     $('.ui.search')
         .search({
@@ -105,5 +186,11 @@
           }
         })
       ;
+
+      $('#ventas-container').on('click', '.ver-detalle', function(){
+        var id = $(this).data('id');
+
+        getDetails(id);
+      });
   });
 </script>
