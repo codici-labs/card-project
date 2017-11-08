@@ -31,10 +31,7 @@ class Sales extends CI_Controller {
 
     private function getTotatlventa($venta_id){
         $total = 0; 
-        $this->db->select('valor, cantidad');
-        $this->db->from('detalles_ventas');
-        $this->db->where('id_venta', $venta_id);
-        $ventas = $this->db->get()->result();
+        $ventas = $this->sales->getDetallesById($venta_id);
 
         foreach ($ventas as $venta) {
             $totalVenta = $venta->valor * $venta->cantidad;

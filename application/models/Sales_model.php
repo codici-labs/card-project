@@ -18,4 +18,8 @@ class Sales_model extends CI_Model
     public function getById($venta_id){
         return $this->db->get_where('ventas', array('id' => $venta_id))->row();
     }
+
+    public function getDetallesById($venta_id){
+        return $this->db->get_where('detalles_ventas', array('id_venta' => $venta_id))->result();
+    }
 }
