@@ -1,13 +1,9 @@
-<div class="ui secondary menu">
-  <a href="<?=base_url('products/add')?>" class="ui button">Agregar nuevo</a>
-  
-</div>
 <div class="ui segment">
 	
-	<h2>Productos</h2>
+	<h2>Ventas</h2>
   <div class="ui search">
     <div class="ui icon input" style="width:100%;">
-      <input class="prompt" type="text" placeholder="Producto...">
+      <input class="prompt" type="text" placeholder="Alumno...">
       <i class="search icon"></i>
     </div>
     <div class="results"></div>

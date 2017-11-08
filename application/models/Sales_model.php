@@ -11,7 +11,7 @@ class Sales_model extends CI_Model
         $this->db->select('v.id, v.id_alumno, v.fecha, a.nombre, a.apellido');
         $this->db->from('ventas v');
         $this->db->join('alumnos a', 'v.id_alumno = a.id');
-        
+        $this->db->order_by('id', 'desc');
         return $this->db->get()->result();
     }
 

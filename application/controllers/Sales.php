@@ -20,7 +20,7 @@ class Sales extends CI_Controller {
     public function get(){
         $sales = new stdClass();
         $sales->venta = $this->sales->getJson();
-
+        
         foreach ($sales->venta as $venta) {
 
             $venta->total = $this->getTotatlventa($venta->id);
