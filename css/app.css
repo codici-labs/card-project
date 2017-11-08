@@ -78,7 +78,8 @@ body {
   .app-main h2 {
     color: #FF9800; }
   .app-main #loader {
-    display: none; }
+    display: none;
+    padding: 60px; }
   .app-main #selected-product {
     display: none; }
   .app-main .selected-product-container {

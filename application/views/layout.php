@@ -19,7 +19,7 @@
 			<?php if($this->config->item('use_avatar')){ ?>
 			<div class="avatar">
 				<img class="ui small circular image" src="<?=base_url()?>images/avatar.png">
-				<div class="username"><i class="edit icon"></i> Martoo</div>
+				<div class="username"><i class="edit icon"></i> Username</div>
 			</div>
 			<?php } ?>
 			<div class="">

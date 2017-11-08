@@ -19,7 +19,7 @@ class Products extends CI_Controller {
 
 	public function add(){
 		$data = array();
-		if(!empty($this->input->post())){
+		if($this->input->post()){
 
 	    	$validate_productname = array(
 			    array(
@@ -51,13 +51,32 @@ class Products extends CI_Controller {
 		$this->layout->view('add',$data);
 	}
 
+	public function get($query = false){
 
-	public function getJson($query){
+		
+		$products = $this->products->getJson($query);
+		echo json_encode($products);
+	}
+
+	/**
+	 * getJson
+	 * Recibe un string para matchear la busqueda en la tabla productos. (opcional)
+	 * Se usa en el buscador de productos
+	 * @param  [string] 
+	 * @return [json]  
+	 */
+	public function getJson($query = false){
+
 		$products = new stdClass();
 		$products->items = $this->products->getJson($query);
 		echo json_encode($products);
 	}
 
+	/**
+	 * Devuelve el detalle de un producto y genera la vista correspondiente
+	 * @param  [int] $product_id 
+	 * 
+	 */
 	public function showProductDetails($product_id){
 		$data['product'] = $this->products->getById($product_id);
 

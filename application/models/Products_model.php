@@ -7,10 +7,13 @@ class Products_model extends CI_Model
         parent::__construct();
     }
 
-    public function getJson($query){
-        $this->db->select('id, descripcion');
+    public function getJson($query = false){
+        $this->db->select('id, descripcion, costo, codigo');
         $this->db->from('productos');
-        $this->db->like('descripcion', $query);
+        if($query){
+            $this->db->like('descripcion', $query);
+        }
+       
         return $this->db->get()->result();
     }
 
