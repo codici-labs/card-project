@@ -42,6 +42,11 @@ class Products extends CI_Controller {
 
 	    	if ($this->form_validation->run())
 	        {
+	        	$insert = array(
+				    'descripcion' => 'product-name',
+				    'codigo' => 'barcode'
+				);
+				$this->db->insert('productos', $insert);
 	            $this->index();
 	        } else {
 	        	$data = $this->input->post();
