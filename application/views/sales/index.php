@@ -24,14 +24,14 @@
   <div class="content">
    
     <div class="description">
-      <div class="ui header">Venta #<span id="venta-id"></span></div>
+      
       <div id="detalle-venta-container"></div>
     </div>
   </div>
   <div class="actions">
-    <div class="ui black deny button">
+    <!-- <div class="ui black deny button">
       Nope
-    </div>
+    </div> -->
     <div class="ui positive right labeled icon button">
       Yep, that's me
       <i class="checkmark icon"></i>
@@ -67,10 +67,10 @@
 
 <!-- Template: Detalle venta -->
 <script id="template-detalle-venta" type="x-tmpl-mustache">
+  <div class="ui header">Venta #<span id="venta-id">{{id}}</span>&nbsp;-&nbsp;{{student}}</div>
   <table class="ui fixed single line celled table">
     <thead>
       <tr>
-        <th>Alumno</th>
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Costo</th>
@@ -80,7 +80,6 @@
     <tbody>
       {{#data}}
       <tr>
-        <td>{{nombre}} {{apellido}}</td>
         <td>{{descripcion}}</td>
         <td>{{cantidad}}</td>
         <td>$ {{costo}}</td>
@@ -132,9 +131,11 @@
       success: function(data){
         console.log(data);
         var parsedData = JSON.parse(data);
+        var id = parsedData[0].id_venta;
+        var student = parsedData[0].nombre + ' ' + parsedData[0].apellido;
 
         var template = $('#template-detalle-venta').html();
-        var rendered = Mustache.render(template, {data: parsedData});
+        var rendered = Mustache.render(template, {data : parsedData, id : id, student : student});
         $('#detalle-venta-container').html(rendered);
        
         //$('#loader').hide();

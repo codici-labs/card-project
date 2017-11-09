@@ -17,7 +17,7 @@ class Products_model extends CI_Model
         if($query){
             $this->db->like('descripcion', $query);
         }
-       
+        $this->db->order_by('descripcion','asc');
         return $this->db->get()->result();
     }
 

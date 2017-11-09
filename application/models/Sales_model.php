@@ -21,10 +21,10 @@ class Sales_model extends CI_Model
 
     public function getFullDetallesById($venta_id){
         
-        $this->db->select('d.id_venta, p.descripcion, p.costo, p.codigo, a.nombre, a.apellido, d.valor as precio_venta, d.cantidad');
+        $this->db->select('d.id_venta, p.descripcion, p.precio_compra as costo, p.codigo, a.nombre, a.apellido, d.valor as precio_venta, d.cantidad');
         $this->db->from('detalles_ventas d');
-        $this->db->join('productos p', 'd.id_producto = p.id', 'left');
-        $this->db->join('ventas v', 'd.id_venta = d.id', 'left');
+        $this->db->join('productos p', 'd.id_producto = p.id');
+        $this->db->join('ventas v', 'd.id_venta = v.id');
         $this->db->join('alumnos a', 'v.id_alumno = a.id');
         $this->db->where('d.id_venta', $venta_id);
         return $this->db->get()->result();
