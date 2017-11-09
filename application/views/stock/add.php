@@ -109,7 +109,7 @@
             title   : 'descripcion',
             url     : 'html_url'
           },
-          minCharacters : 3,
+          minCharacters : 1,
           onSelect: function(result, response){
             $('.content').hide();
             $('#prduct-detail').html('');

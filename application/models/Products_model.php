@@ -7,6 +7,10 @@ class Products_model extends CI_Model
         parent::__construct();
     }
 
+    public function add($data){
+        $this->db->insert('productos', $data);
+    }
+
     public function getJson($query = false){
         $this->db->select('id, descripcion, costo, codigo');
         $this->db->from('productos');

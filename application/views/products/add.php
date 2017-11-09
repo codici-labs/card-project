@@ -1,3 +1,5 @@
+<?php  ?>
+
 <div class="ui secondary menu">
   <a href="<?=base_url('products')?>" class="ui button">
     <i class="left arrow icon"></i> Volver
@@ -131,7 +133,7 @@
     }
   });
 
-  <?php if(isset($_POST)){ ?>
+  <?php if($_POST){ ?>
     (function(){
       $('input[name="barcode"]').val('<?=$_POST["barcode"]?>');
       $('input[name="product-name"]').val('<?=$_POST["product-name"]?>');

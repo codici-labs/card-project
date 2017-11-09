@@ -19,6 +19,7 @@ class Products extends CI_Controller {
 
 	public function add(){
 		$data = array();
+
 		if($this->input->post()){
 
 	    	$validate_productname = array(
@@ -43,11 +44,12 @@ class Products extends CI_Controller {
 	    	if ($this->form_validation->run())
 	        {
 	        	$insert = array(
-				    'descripcion' => 'product-name',
-				    'codigo' => 'barcode'
+				    'descripcion' => $this->input->post('product-name'),
+				    'codigo' => $this->input->post('barcode')
 				);
-				$this->db->insert('productos', $insert);
+				$this->products->add($insert);
 	            $this->index();
+	            return;
 	        } else {
 	        	$data = $this->input->post();
 	        }
