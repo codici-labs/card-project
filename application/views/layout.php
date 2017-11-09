@@ -28,7 +28,7 @@
 					<li><a href="<?=base_url()?>products"><i class="shop outline icon"></i> Productos</a></li>
 					<li><a href="<?=base_url()?>stock"><i class="shop outline icon"></i> Stock</a></li>
 					<li><a href="<?=base_url()?>sales"><i class="dollar icon"></i> Ventas</a></li>
-					<li><a href=""><i class="address card outline icon"></i> Alumnos</a></li>
+					<li><a href="<?=base_url()?>students"><i class="address card outline icon"></i> Alumnos</a></li>
 					<li><a href=""><i class="alarm outline icon"></i> Notificaciones</a></li>
 					
 				</ul>
