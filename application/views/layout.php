@@ -5,10 +5,10 @@
 	<!-- Assets -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/app.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/jquery-3.2.1.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/semantic.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/app.js"></script>
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+  	<script type="text/javascript" src="<?=base_url()?>js/Chart.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/mustache.js"></script>
 
 </head>
@@ -24,11 +24,12 @@
 			<?php } ?>
 			<div class="">
 				<ul class="links">
-					<li><a href="<?=base_url()?>dashboard"><i class="dashboard outline icon"></i> Dashboard</a></li>
-					<li><a href="<?=base_url()?>products"><i class="shop outline icon"></i> Productos</a></li>
-					<li><a href="<?=base_url()?>stock"><i class="shop outline icon"></i> Stock</a></li>
-					<li><a href="<?=base_url()?>sales"><i class="dollar icon"></i> Ventas</a></li>
-					<li><a href="<?=base_url()?>students"><i class="address card outline icon"></i> Alumnos</a></li>
+					<li><a class="<?php if($pagename=='dashboard') echo 'active' ;?>" href="<?=base_url('dashboard')?>"><i class="dashboard outline icon"></i> Dashboard</a></li>
+					<li><a class="<?php if($pagename=='salepoints') echo 'active' ;?>" href="<?=base_url('salepoints')?>"><i class="marker outline icon"></i> Puntos de ventas</a></li>
+					<li><a class="<?php if($pagename=='products') echo 'active' ;?>" href="<?=base_url('products')?>"><i class="shop outline icon"></i> Productos</a></li>
+					<li><a class="<?php if($pagename=='stock') echo 'active' ;?>" href="<?=base_url('stock')?>"><i class="shop outline icon"></i> Stock</a></li>
+					<li><a class="<?php if($pagename=='sales') echo 'active' ;?>" href="<?=base_url('sales')?>"><i class="dollar icon"></i> Ventas</a></li>
+					<li><a class="<?php if($pagename=='students') echo 'active' ;?>" href="<?=base_url('students')?>"><i class="address card outline icon"></i> Alumnos</a></li>
 					<li><a href=""><i class="alarm outline icon"></i> Notificaciones</a></li>
 					
 				</ul>

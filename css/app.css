@@ -51,8 +51,12 @@ body {
         padding: 8px 15px;
         display: block;
         color: #fff;
-        transition: all ease 0.5s; }
+        transition: all ease .5s; }
+        .app-sidebar .links li a.active {
+          color: #FF9800;
+          background-color: #1d1d1d; }
       .app-sidebar .links li a:hover {
+        color: #ffffff;
         background-color: #FF9800;
         transition: all ease 0.5s; }
   .app-sidebar .avatar {

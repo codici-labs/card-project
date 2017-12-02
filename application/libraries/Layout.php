@@ -6,9 +6,13 @@ class Layout{
     public $obj;
     public $layout;
     public $folder;
+    public $pagename;
 
     public function __construct($layout = "layout", $folder="dashboard"){
         $this->obj =& get_instance();
+        
+        $this->pagename = $this->obj->uri->segment(1);
+
         $this->setLayout($layout);
         $this->setFolder($folder);
     }
@@ -21,8 +25,10 @@ class Layout{
       $this->folder = $folder;
     }
 
-    public function view($view, $data=null, $return=false){
+    public function view($view, $data=array(), $return=false){
         
+        $data["pagename"] = $this->pagename;
+
         $view = $this->folder . '/' . $view;
         
         $loadedData = array();

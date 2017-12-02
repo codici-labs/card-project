@@ -6,7 +6,6 @@ class Products extends CI_Controller {
 	public function __construct(){
            
         parent::__construct();
-        $this->load->helper('url');
     	$this->load->library('Layout');
     	$this->load->model('Products_model', 'products');            
     	$this->layout->setFolder('products');       

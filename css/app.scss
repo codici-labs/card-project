@@ -57,13 +57,18 @@ $main-color : $naranja;
 				padding: 8px 15px;
 				display: block;
 				color: #fff;
-				transition: all ease .5s
+				transition: all ease .5s;
+
+				&.active{
+					color: $main-color;
+					background-color: #1d1d1d;
+				}
 			}
 			a:hover{
+				color: #ffffff;
 				background-color: $main-color;
 				transition: all ease .5s
 			}
-
 		}
 	}
 
@@ -141,5 +146,3 @@ $main-color : $naranja;
 	display:none;
 	width: 100%;
 }
-
-
