@@ -1,0 +1,137 @@
+users
+	id
+	mail
+	first_name
+	last_name
+	password
+	user_type
+	guid
+	credit
+	max_type
+	max
+	min
+	authorized
+	active
+	registered
+
+cards
+	id
+	code
+	user_id
+	alias
+	photo_id
+	active
+	registered
+
+locations
+	id
+	name
+
+sale_points
+	id
+	name
+	location_id
+	sale_channel_id
+
+sale_channels
+	id
+	name
+
+products
+	id
+	name
+	description
+	price
+	barcode
+	registered
+
+sale_point_products
+	id
+	sale_point_id
+	product_id
+	stock
+
+sale_channel_products
+	id
+	sale_channel_id
+	product_id
+
+stocks
+	id
+	product_id
+	sale_point_id
+	original_quantity
+	current_quantity
+	sell_price
+	buy_price
+	expiration
+	registered
+	timestamp
+
+sales
+	id
+	card_id
+	seller_id
+	sale_point_id
+	sale_channel_id
+	registered
+
+sales_items
+	id
+	sale_id
+	product_id
+	buy_price
+	sell_price
+	quantity
+
+
+
+
+
+Puntos de venta
+- Representan cada punto de venta de una "location" (colegio/sistema).
+- Pueden ser varios buffets, venta física y web, punto único, etc.
+- Cada uno cuenta con su propio stock. No existe una tabla que tenga 
+
+- En la próxima versión habría que mover el precio de venta de un producto a la tabla de stock para permitir distintos precios 
+segun punto de venta (puede tener distinto precio en la web que en el local por ejemplo)
+
+
+
+Si quiero traer todos los productos
+
+Para saber ventas de un stock, consulto por los n productos de ese stock vendidos desde el momento que ingresó 
+
+Sale point id y sale channel id (opcional - si es null, toma el del sale point) configurados in app
+Para casos donde no coincida con el sale channel del punto de venta (por ej queres mantener un stock unico centralizado pero saber de donde provienen las ventas)
+
+Cálculo ganancias
+	Intervalo de tiempo: Ventas - Entrada de stock
+	Ventas entre entrada de stock y próxima entrada de stock
+
+Fecha de vencimiento
+Ganancias por cada stock
+
+
+Procedimiento:
+1) Creo canales.
+2) Creo puntos.
+3) Carga productos.
+	Asigno puntos.
+	Opcional: Asigno canales.
+4) Carga stock.
+	Campo de stock total por location.
+	Lo dividís por sale point
+	(% precargados / = en cada uno)
+	Cargas precio compra (único)
+	Cargas precio venta (opcional variable)
+
+
+V3:
+Productos preparados.
+Más de un colegio, misma o distintas bases?
+Tabla de dispositivos (identificar de que aparato proviene la venta)
+Ofertas / promociones de productos (distinto precio al regular)
+Tabla de configuraciones para el colegio (por ej. hacer un único recuento de stock para todos los puntos de venta)
+Stock diff cuando cargas una venta (tipo de venta especial u otra tabla con "irregularidades")
+Min stock de producto segun el cual dispara alerta.
