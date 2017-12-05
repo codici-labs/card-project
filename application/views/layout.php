@@ -5,12 +5,14 @@
 	<!-- Assets -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/app.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/snippets.css">
 	<script type="text/javascript" src="<?=base_url()?>js/jquery-3.2.1.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/semantic.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/app.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/Chart.min.js"></script>
   	<script type="text/javascript" src="<?=base_url()?>js/mustache.js"></script>
-
+  	<script type="text/javascript" src="<?=base_url()?>js/jquery.validate.min.js"></script>
+  	<script type="text/javascript">window.baseUrl='<?=base_url()?>';</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -33,16 +35,17 @@
 					<li><a href=""><i class="alarm outline icon"></i> Notificaciones</a></li>
 					
 				</ul>
-		    
 			</div>
 
 		</div>
 		<!-- / Sidebar -->
-	  	<!-- App content -->
+		<!-- App content -->
 		<div class="app-main">
 			<?php echo $content_for_layout;?>
 		</div>
 		<!-- / App content -->
+		
+		<?=$server_error?>
 	</div>
 	
 </body>

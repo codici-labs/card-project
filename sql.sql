@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2017 at 01:51 PM
+-- Generation Time: Dec 05, 2017 at 04:03 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -125,7 +125,7 @@ CREATE TABLE `sale_points` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `location_id` int(11) NOT NULL,
-  `sale_channel_id` int(11) NOT NULL
+  `sale_channel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -197,7 +197,8 @@ ALTER TABLE `cards`
 -- Indexes for table `locations`
 --
 ALTER TABLE `locations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `sales`
@@ -227,7 +228,9 @@ ALTER TABLE `sale_items`
 -- Indexes for table `sale_points`
 --
 ALTER TABLE `sale_points`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_salepoint_index` (`name`,`location_id`) USING BTREE,
+  ADD KEY `location_id` (`location_id`);
 
 --
 -- Indexes for table `sale_point_products`
@@ -254,7 +257,7 @@ ALTER TABLE `cards`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sales`
 --
@@ -279,7 +282,7 @@ ALTER TABLE `sale_items`
 -- AUTO_INCREMENT for table `sale_points`
 --
 ALTER TABLE `sale_points`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 --
 -- AUTO_INCREMENT for table `sale_point_products`
 --
@@ -290,6 +293,16 @@ ALTER TABLE `sale_point_products`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `sale_points`
+--
+ALTER TABLE `sale_points`
+  ADD CONSTRAINT `sale_points_location_id` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

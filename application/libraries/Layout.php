@@ -26,7 +26,8 @@ class Layout{
     }
 
     public function view($view, $data=array(), $return=false){
-        
+        $server_error = $this->obj->session->flashdata('server_error');
+        $data["server_error"] = $server_error ? '<div id="snackbar">'.$server_error.'</div>' : '';
         $data["pagename"] = $this->pagename;
 
         $view = $this->folder . '/' . $view;
