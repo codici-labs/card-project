@@ -29,6 +29,7 @@ class Layout{
         $server_error = $this->obj->session->flashdata('server_error');
         $data["server_error"] = $server_error ? '<div id="snackbar">'.$server_error.'</div>' : '';
         $data["pagename"] = $this->pagename;
+        $data["method"] = $this->obj->router->method;
 
         $view = $this->folder . '/' . $view;
         

@@ -3,15 +3,18 @@
 <head>
 	<title>Card</title>
 	<!-- Assets -->
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/app.css">
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/snippets.css">
-	<script type="text/javascript" src="<?=base_url()?>js/jquery-3.2.1.min.js"></script>
-  	<script type="text/javascript" src="<?=base_url()?>js/semantic.min.js"></script>
-  	<script type="text/javascript" src="<?=base_url()?>js/app.js"></script>
-  	<script type="text/javascript" src="<?=base_url()?>js/Chart.min.js"></script>
-  	<script type="text/javascript" src="<?=base_url()?>js/mustache.js"></script>
-  	<script type="text/javascript" src="<?=base_url()?>js/jquery.validate.min.js"></script>
+	<?=add_style('semantic.min')?>
+	<?=add_style('app',TRUE)?>
+	<?=add_style('snippets')?>
+
+	<?=add_jscript('jquery-3.2.1.min')?>
+	<?=add_jscript('semantic.min')?>
+	<?=add_jscript('tablesort.min')?>
+	<?=add_jscript('app',TRUE)?>
+	<?=add_jscript('mustache')?>
+	<?=add_jscript('jquery.validate.min')?>
+	<?=add_jscript('Chart.min')?>
+  	
   	<script type="text/javascript">window.baseUrl='<?=base_url()?>';</script>
 </head>
 <body>

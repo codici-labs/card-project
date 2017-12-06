@@ -147,8 +147,54 @@ $main-color : $naranja;
 	width: 100%;
 }
 
+.crud-table{
+	a {
+		outline: none;
+	}
+	
+	thead th{
+		border-left: none!important;
+		&:not(:last-child):after {
+			position: absolute!important
+		}
+		&.no-sort{
+			cursor: default!important;
+		}
+	}
+
+	thead th:last-child,
+	tr > td:last-child{
+		text-align: right;
+		
+		a {
+			color: #cecece;
+			margin-left: 3px;
+			&:hover {
+				i.remove{
+					color:#f44336;
+				}
+
+				i.write{
+					color:#03a9f4;
+				}
+			}
+
+			&[data-position="top right"][data-tooltip]:before{
+				right: 0.25em!important;
+			}
+		}
+	}
+}
 
 // Semantic UI Style Overrides
 .ui.message .list:not(.ui) li:before {
 	content: '-';
 }
+.dropdown {
+	outline: none;
+}
+.ui.selectable.table.crud-table tbody tr:hover,
+.ui.table.crud-table tbody tr td.selectable:hover{
+	background: rgba(0, 0, 0, 0.10)!important;
+}
+

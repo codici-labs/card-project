@@ -1,19 +1,18 @@
+<?php $id = $method == 'edit' ? '/'.$salepoint->id : ''; ?>
 <div class="ui secondary menu">
   <a href="<?=base_url($pagename)?>" class="ui button">
     <i class="left arrow icon"></i> Volver
   </a>
-  <div class="right menu">
-   
+  <div class="right menu">   
   </div>
 </div>
 <div class="ui segment">
-	<h2>Agregar punto de venta</h2>
-  
-  <form class="ui form" action="<?=base_url('salepoints/add')?>" method="POST">
+	<h2>Agregar punto de venta</h2>  
+  <form class="ui form" action="<?php echo base_url('salepoints/'.$method.$id)?>" method="POST">
     <div class="two fields">
       <div class="field">
         <label>Nombre</label>
-        <input type="text" name="sale-point-name">
+        <input type="text" name="sale-point-name" <?=$method == 'edit' ? 'value="'.$salepoint->name.'"' : '';?>>
       </div>
       <div class="field">
         <label>Ubicación</label>
@@ -23,7 +22,10 @@
           <div class="default text">Seleccionar</div>
           <div class="menu">
               <?php foreach ($locations as $location) {
-                echo '<div class="item" data-value="'.$location->id.'">'.$location->name.'</div>';
+                $selected = '';
+                if( $method == 'edit' && $salepoint->l_id == $location->id)
+                  $selected = 'selected';
+                echo '<div class="item" '.$selected.' data-value="'.$location->id.'">'.$location->name.'</div>';
               } ?>
           </div>
       </div>
@@ -48,9 +50,10 @@
       'sale-point-name': {
         required: true,
         remote: {
-          url: baseUrl + 'dashboard/unique',
+          url: url('dashboard/unique'),
           type: "post",
           data: {
+            <?=$method=="edit"?"except: ".$salepoint->id.",\n":"";?>
             type: 'salepoint',
             'sale-point-name': function() {
               return $('[name="sale-point-name"]').val()              
@@ -88,6 +91,7 @@
   $(document).on('input change', '.form .field.error input[type="hidden"]', function(){
     $(this).valid();
   });
+
 
 
 </script>

@@ -104,32 +104,32 @@
           apiSettings: {
             url: '<?=base_url();?>products/getJson/{query}'
           },
-          fields: {
-            results : 'items',
-            title   : 'descripcion',
-            url     : 'html_url'
-          },
+          // fields: {
+          //   results : 'items',
+          //   title   : 'descripcion',
+          //   url     : 'html_url'
+          // },
           minCharacters : 1,
           onSelect: function(result, response){
-            $('.content').hide();
-            $('#prduct-detail').html('');
-            $('.selected-product-container').fadeIn();
-            $('#loader').fadeIn();
+            // $('.content').hide();
+            // $('#prduct-detail').html('');
+            // $('.selected-product-container').fadeIn();
+            // $('#loader').fadeIn();
           
-            var product_id = result.id;
-            $.ajax({
-              url: '<?=base_url();?>products/showProductDetails/'+product_id,
-              method: 'get',
-              success: function(template){
-                  $('#loader').fadeOut('100', function(){
-                    $('#prduct-detail').html(template);
-                    $('#selected-product').fadeIn();
-                    $('.content').show();
+            // var product_id = result.id;
+            // $.ajax({
+            //   url: '<?=base_url();?>products/showProductDetails/'+product_id,
+            //   method: 'get',
+            //   success: function(template){
+            //       $('#loader').fadeOut('100', function(){
+            //         $('#prduct-detail').html(template);
+            //         $('#selected-product').fadeIn();
+            //         $('.content').show();
                    
-                  });
+            //       });
                   
-              }
-            });
+            //   }
+            // });
           }
         })
       ;

@@ -16,10 +16,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // pre_controller
 // post_controller
 
-// $hook['post_controller_constructor'] = array(
-//     'class'    => 'Initialization',
-//     'function' => 'start',
-//     'filename' => 'Initialization.php',
-//     'filepath' => 'hooks',
-//     'params'   => array()
-// );
+$hook['pre_controller'] = array(
+    'class'    => 'Hooks',
+    'function' => 'preController',
+    'filename' => 'Hooks.php',
+    'filepath' => 'hooks',
+    'params'   => array()
+);
+
+$hook['post_controller_constructor'] = array(
+    'class'    => 'Hooks',
+    'function' => 'postControllerConstructor',
+    'filename' => 'Hooks.php',
+    'filepath' => 'hooks',
+    'params'   => array()
+);

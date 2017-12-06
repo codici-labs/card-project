@@ -1,12 +1,25 @@
+function url(path){
+	return baseUrl + path;
+}
+
 $(document).ready(function(){
 	// Init dropdown
 	$('.dropdown').dropdown();
-	
+
+
+	// $('.activating.element').popup();
+
 	// Select and disable if only one option in dropdown
 	$('.dropdown.selection').each(function(){
 		var selectOptions = $(this).find('.menu .item');
-		if(selectOptions.length == 1)
+		if(selectOptions.length == 1) {
 			$(this).dropdown('set selected', selectOptions.data('value')).addClass("disabled");
+		} else {
+			selectOptions.each( $.proxy(function(index, value){
+				if($(value).attr('selected') == 'selected')
+					$(this).dropdown('set selected', $(selectOptions[index]).data('value'));
+			}, this));
+		}
 	});
 
 	$("#snackbar").addClass("show");

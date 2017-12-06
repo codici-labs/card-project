@@ -11,17 +11,27 @@ class Sale_points_model extends CI_Model
         $this->db->insert('sale_points', $data);
     }
 
-    // public function getJson($query = false){
-    //     $this->db->select('id, descripcion, costo, codigo');
-    //     $this->db->from('productos');
-    //     if($query){
-    //         $this->db->like('descripcion', $query);
-    //     }
-    //     $this->db->order_by('descripcion','asc');
-    //     return $this->db->get()->result();
-    // }
+    public function update($data, $where=NULL){
+    	if($where){
+    		$this->db->where($where);
+			$this->db->update('sale_points', $data);
+    	}
+    }
 
-    // public function getById($product_id){
-    //     return $this->db->get_where('productos', array('id' => $product_id))->row();
-    // }
+    public function get($where=NULL){
+    	if($where) $this->db->where($where);
+
+    	$this->db->select("
+		sp.id,
+		sp.name,
+		l.id as l_id,
+		l.name as l_name");
+
+    	$this->db->join('locations l','l.id = sp.location_id');
+    	$this->db->where('deleted',0);
+    	$query = $this->db->get('sale_points sp');
+    	
+    	return $query->result();
+    }
+
 }
