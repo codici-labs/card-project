@@ -15,6 +15,7 @@
 <div class="ui segment" id="loader">
   <div class="ui active loader"></div>
 </div>
+
 <div id="salepoints-container"></div>
 
 
@@ -31,7 +32,9 @@
 </div>
 
 
-<!-- Template: Sale points -->
+
+
+<!-- Templates -->
 <script id="template-salepoints" type="x-tmpl-mustache">
   <table class="ui selectable sortable table crud-table">
     <thead>
@@ -86,72 +89,46 @@
 
 <script type="text/javascript">
 
-  // $.post( url('salepoints/get') );
+(function (){
+	$('#loader').show();
+	$.ajax({
+		url: url('salepoints/get'),
+		method: 'post',
+		success: function(data){
+			var template = $('#template-salepoints').html();
+			var rendered = Mustache.render(template, {data:data});
+			$('#salepoints-container').html(rendered);
+			$('table.crud-table').tablesort();
+			$('#loader').hide();
+		}
+	});
+})();
 
-  (function (){
-      // $('#loader').show();
-      // $('#salepoints-container').html('');
-      $.ajax({
-        url: url('salepoints/get'),
-        method: 'post',
-        success: function(data){
-  			console.log(data);
-          // var parsedData = JSON.parse(data);
-          var template = $('#template-salepoints').html();
-          var rendered = Mustache.render(template, {data:data});
-          $('#salepoints-container').html(rendered);
-         	$('table.crud-table').tablesort();
-          // $('#loader').hide();
-          
-        }
-      });  
-    })();
+    
+$('.ui.search').search({
+	apiSettings: {
+		url: url('salepoints/get/{query}')
+	},
+	fields: {
+		results : 'dummy',
+		title   : 'name',
+		url     : 'html_url'
+	},
+	minCharacters : 1,
+	onSelect: function(result, response){
+		window.location.href = url('salepoints/edit/' + result.id);            
+	}
+});
 
-  $(document).ready(function(){
-    // getProducts();
 
-    $('.ui.search')
-        .search({
-          apiSettings: {
-            url: url('salepoints/get/{query}')
-          },
-          fields: {
-            results : 'items',
-            title   : 'name',
-            url     : 'html_url'
-          },
-          minCharacters : 1,
-          onSelect: function(result, response){
-          	console.log(result, response);
-            /*$('.content').hide();
-            $('#prduct-detail').html('');
-            $('.selected-product-container').fadeIn();
-            $('#loader').fadeIn();*/
-          
-           /*var product_id = result.id;
-            $.ajax({
-              url: '<?=base_url();?>products/showProductDetails/'+product_id,
-              method: 'get',
-              success: function(template){
-                  $('#loader').fadeOut('100', function(){
-                    $('#prduct-detail').html(template);
-                    $('#selected-product').fadeIn();
-                    $('.content').show();
-                   
-                  });
-                  
-              }
-            });*/
-          }
-        })
-      ;
-  });
 
-   $(document).on('click', '.delete-registry', function(){
-   	var $table = $(this).parents('table.crud-table'),
-   	template = $('#template-delete').html(),
-   	id = $(this).parents('tr').data('delete-id'),
-   	details = '';
+// Delete
+$(document).on('click', '.delete-registry', function(){
+
+	var $table = $(this).parents('table.crud-table'),
+	template = $('#template-delete').html(),
+	id = $(this).parents('tr').data('delete-id'),
+	details = '';
 
 	for(var i = 0; i < $table.find('thead th').length - 1; i++)
 		details += $table.find('thead th')[i].innerText + ': ' +
@@ -159,36 +136,19 @@
 
 	$( Mustache.render(template, {details:details}) )
 	.modal({
-        onApprove: function() {
-            // $.post('', {}, function(){
+		onApprove: function() {
+			$.post(url('salepoints/delete/'+id), function(response){
+				snackbar.add(response.message, response.status);
+				if(response.status){
+					$('tr[data-delete-id="' + id + '"]').slideUp('fast',function(){
+						$(this).remove();
+					})
+				}
+			});
+		}
+	})
+	.modal('show');
 
-            // })
-        }
-    })
-    .modal('show');
-   });
+});
 
- //  function myFunction() {
-	//   // Declare variables 
-	//   var input, filter, table, tr, td, i, j;
-	//   input = document.getElementById("myInput");
-	//   filter = input.value.toUpperCase();
-	//   table = document.getElementById("myTable");
-	//   tr = table.getElementsByTagName("tr");
-
-	//   // Loop through all table rows, and hide those who don't match the search query
-	//   for (i = 0; i < tr.length; i++) {
-
-	//   	// for (j = 0; j < )
-
-	//     td = tr[i].getElementsByTagName("td")[0];
-	//     if (td) {
-	//       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-	//         tr[i].style.display = "";
-	//       } else {
-	//         tr[i].style.display = "none";
-	//       }
-	//     } 
-	//   }
-	// }
 </script>

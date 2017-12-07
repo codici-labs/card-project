@@ -6,9 +6,6 @@ $(document).ready(function(){
 	// Init dropdown
 	$('.dropdown').dropdown();
 
-
-	// $('.activating.element').popup();
-
 	// Select and disable if only one option in dropdown
 	$('.dropdown.selection').each(function(){
 		var selectOptions = $(this).find('.menu .item');
@@ -22,42 +19,30 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#snackbar").addClass("show");
-	setTimeout(function(){ $("#snackbar").removeClass("show"); }, 5000);
+
 });
 
-// Validate form on input/change when there are errors
-// $(document).on('input change', '.form.error input', function(){
-// 	$('.ui.form').form('validate form');
-// });
 
+var snackbar = (function(){
+	function add(msg, type){
+		type = typeof type === 'number' ? (type ? 'success' : 'error') : type;
+		
+		var $container = $('#snackbar-container>div');
+		var el = document.createElement('div');
+		
+		el.classList.add('snack');
+		if(typeof type !== 'undefined') el.classList.add(type);
 
+		el.innerHTML = msg;
+		$container.prepend(el);
+		setTimeout(function(){ $(el).slideUp('slow',function() {
+		    $(this).remove();
+		}); }, 5000);
+	}
 
-// var extraValidation = (function(){
-
-// 	// function paramCheck(options, fields){
-// 	// 	var valid = true;
-// 	// 	fields.forEach(function(value){
-// 	// 		// !options.hasOwnProperty(value)
-// 	// 		if( typeof options[value] === 'undefined' ) valid = false;
-// 	// 	});
-// 	// 	return valid;
-// 	// }
-// 	// ['table', 'field', 'value']
-	
-// 	function isUnique(type, options){
-// 		// if( paramCheck(options, ) ) {
-// 		return $.post(baseUrl+'dashboard/unique', {
-// 			type: type,
-// 			options: options
-// 		});
-// 		// } else return $.Deferred().resolve(null);
-
-// 	}
-
-// 	return {
-// 		isUnique: isUnique
-// 	}
-
-// })();
-
+	return {
+		add: add,
+		error: function(msg){ add(msg, 'error') },
+		success: function(msg){ add(msg, 'success') }
+	}
+})();

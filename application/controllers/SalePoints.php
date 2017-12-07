@@ -24,18 +24,15 @@ class SalePoints extends CI_Controller {
 			    'location_id' => $this->input->post('location')
 			);
 
-			$db_debug = $this->db->db_debug;
-        	$this->db->db_debug = FALSE;
-        	$this->salepoints->add($insert); // <-
-        	$this->db->db_debug = $db_debug;
         	$db_err = $this->db->error();
 
-        	if($db_err['code']){
-        		log_message('error', 'Expected DB error - Code: '.$db_err['code'].' / Message: '.$db_err['message']);
-        		$this->session->set_flashdata('server_error', lang('db_error_insert'));
-        	} else {
-        		redirect(base_url('salepoints'));
-        	}
+        	try {
+				$this->salepoints->add($insert);
+		    } catch ( DbException $e ) {
+		    	$e->handleError();
+		    }
+
+        	redirect(base_url('salepoints'));
 		}
 
 		$data = array();
@@ -51,18 +48,14 @@ class SalePoints extends CI_Controller {
 			    'location_id' => $this->input->post('location')
 			);
 
-			$db_debug = $this->db->db_debug;
-        	$this->db->db_debug = FALSE;
-        	$this->salepoints->update($update, array('id'=>$id)); // <-
-        	$this->db->db_debug = $db_debug;
-        	$db_err = $this->db->error();
+			try {
+				$this->salepoints->update($update, array('id'=>$id));
+			} catch( DbException $e) {
+				$e->handleError();
+			}
 
-        	if($db_err['code']){
-        		log_message('error', 'Expected DB error - Code: '.$db_err['code'].' / Message: '.$db_err['message']);
-        		$this->session->set_flashdata('server_error', lang('db_error_update'));
-        	} else {
-        		redirect(base_url('salepoints'));
-        	}
+        	
+       		redirect(base_url('salepoints'));
 		}		
 
 		$data = array();
@@ -78,17 +71,20 @@ class SalePoints extends CI_Controller {
 	}
 
 	public function delete($id = 0){
-
+		try {
+			$this->salepoints->delete($id);
+		} catch( DbException $e) {
+			$e->handleError();
+		}
+		jsonify(lang('sale_point_deleted'), 1);
 	}
 
-	public function get(){
-		if($this->input->is_ajax_request()){
-		    jsonify($this->salepoints->get());
-		}
+	public function get($filter = NULL){
 
-	// 	$data = array();
-	// 	// header('Content-Type: application/json');
-	// 	$this->layout->view('add_edit', $data);
+		// if($this->input->is_ajax_request()){
+		    jsonify($this->salepoints->get(null, $filter));
+		// }
+
 	}
 
 }

@@ -3,15 +3,15 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Layout{
 
-    public $obj;
+    private $ci;
     public $layout;
     public $folder;
     public $pagename;
 
     public function __construct($layout = "layout", $folder="dashboard"){
-        $this->obj =& get_instance();
+        $this->ci =& get_instance();
         
-        $this->pagename = $this->obj->uri->segment(1);
+        $this->pagename = $this->ci->uri->segment(1);
 
         $this->setLayout($layout);
         $this->setFolder($folder);
@@ -26,21 +26,20 @@ class Layout{
     }
 
     public function view($view, $data=array(), $return=false){
-        $server_error = $this->obj->session->flashdata('server_error');
-        $data["server_error"] = $server_error ? '<div id="snackbar">'.$server_error.'</div>' : '';
+        $data["server_error"] = $this->ci->session->flashdata('server_error');
         $data["pagename"] = $this->pagename;
-        $data["method"] = $this->obj->router->method;
+        $data["method"] = $this->ci->router->method;
 
         $view = $this->folder . '/' . $view;
         
         $loadedData = array();
-        $loadedData['content_for_layout'] = $this->obj->load->view($view,$data,true);
+        $loadedData['content_for_layout'] = $this->ci->load->view($view,$data,true);
 
         if($return){
-            $output = $this->obj->load->view($this->layout, $loadedData, true);
+            $output = $this->ci->load->view($this->layout, $loadedData, true);
             return $output;
         }else{
-            $this->obj->load->view($this->layout, $loadedData, false);
+            $this->ci->load->view($this->layout, $loadedData, false);
         }
         
     }

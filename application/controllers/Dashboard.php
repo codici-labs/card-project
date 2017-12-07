@@ -38,7 +38,11 @@ class Dashboard extends CI_Controller {
     }
 
     private function _unique($table, $options){
-    	return $this->dashboard->unique($table, $options);
+    	try {
+    		return $this->dashboard->unique($table, $options);
+    	} catch ( DbException $e ) {
+    		$e->handleError();
+    	}
     }
 
 }

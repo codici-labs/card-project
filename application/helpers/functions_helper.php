@@ -1,4 +1,4 @@
-<?php  
+<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 function kill($data='Test'){
 	echo "<pre>\n";
@@ -19,9 +19,17 @@ function qkill($that){
 	die();
 }
 
-function jsonify($data){
+function jsonify($data, $ajaxStatus = null){
+	if($ajaxStatus !== null) {
+		$response = new stdClass();
+		$response->status = $ajaxStatus;
+		$response->message = $data;
+	} else {
+		$response = $data;
+	}
 	header('Content-Type: application/json');
-	echo json_encode($data);
+	echo json_encode($response);
+	die();
 }
 
 ?>

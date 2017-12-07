@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Sale_points_model extends CI_Model
 {   
@@ -8,18 +8,38 @@ class Sale_points_model extends CI_Model
     }
 
     public function add($data){
-        $this->db->insert('sale_points', $data);
+        $query = $this->db->insert('sale_points', $data);
+        	
+        if(!$query || $this->db->error()['code']) throw new DbException();
     }
 
-    public function update($data, $where=NULL){
+    public function update($data, $where){
+		$this->db->where($where);
+		$query = $this->db->update('sale_points', $data);
+
+		if(!$query || $this->db->error()['code']) throw new DbException();
+    }
+
+    public function delete($id){
+
+    	$this->db->where('id', $id);
+    	$query = $this->db->update('sale_points', array(
+    		'deleted' => 1,
+    		'deleted_on' => date("Y-m-d H:i:s")
+    	));
+
+		if(!$query || $this->db->error()['code']) throw new DbException();
+    }
+
+    public function get($where = NULL, $filter = NULL){
+    	if($filter) {
+    		$this->db->like('sp.name', $filter);
+    		// $this->db->or_like('l.name', $filter);
+    	}
+
     	if($where){
     		$this->db->where($where);
-			$this->db->update('sale_points', $data);
     	}
-    }
-
-    public function get($where=NULL){
-    	if($where) $this->db->where($where);
 
     	$this->db->select("
 		sp.id,
@@ -28,7 +48,7 @@ class Sale_points_model extends CI_Model
 		l.name as l_name");
 
     	$this->db->join('locations l','l.id = sp.location_id');
-    	$this->db->where('deleted',0);
+    	$this->db->where('deleted', 0);
     	$query = $this->db->get('sale_points sp');
     	
     	return $query->result();

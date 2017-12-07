@@ -9,13 +9,24 @@
 
 	<?=add_jscript('jquery-3.2.1.min')?>
 	<?=add_jscript('semantic.min')?>
-	<?=add_jscript('tablesort.min')?>
+	<?=add_jscript('tablesort.min')?>	
 	<?=add_jscript('app',TRUE)?>
 	<?=add_jscript('mustache')?>
 	<?=add_jscript('jquery.validate.min')?>
 	<?=add_jscript('Chart.min')?>
+	
+  	<script type="text/javascript">
+  		window.baseUrl='<?=base_url()?>';
+
+  		<?php if(!is_null($server_error)) echo 'snackbar.error("'.$server_error.'");'  ?>
+
+  		$(document).ajaxError(function (event, jqxhr, settings, exception) {
+		   if (jqxhr.status === 400 && jqxhr.responseJSON.status === 0) {
+		   		snackbar.error(jqxhr.responseJSON.message);
+		   }
+		}); 
+  	</script>
   	
-  	<script type="text/javascript">window.baseUrl='<?=base_url()?>';</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -48,7 +59,8 @@
 		</div>
 		<!-- / App content -->
 		
-		<?=$server_error?>
+		<div id="snackbar-container"><div></div></div>
+
 	</div>
 	
 </body>
